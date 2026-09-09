@@ -170,7 +170,8 @@
         </div>
     </section>
 
-      <!-- Ethers.js & EmailJS Libraries -->
+
+    <!-- Ethers.js & EmailJS Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
@@ -178,11 +179,11 @@
 <section id="books" class="py-20 bg-slate-50 border-t border-slate-200">
     <div class="max-w-6xl mx-auto px-6">
         
-        <!-- Header -->
+        <!-- Section Header -->
         <div class="text-center mb-14">
             <span class="text-xs font-semibold text-red-600 uppercase tracking-widest">Publications & Pre-Orders</span>
             <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">Author Books & Works</h2>
-            <p class="text-slate-600 text-sm mt-2">Instant digital delivery or crypto pre-orders available below.</p>
+            <p class="text-slate-600 text-sm mt-2">Instant digital delivery or low-fee crypto pre-orders available below.</p>
         </div>
 
         <!-- 4-Book Grid -->
@@ -264,7 +265,7 @@
     </div>
 </section>
 
-<!-- ================= MODAL: BOOK 1 PURCHASE (ON-CHAIN VERIFICATION) ================= -->
+<!-- ================= MODAL 1: BOOK 1 PURCHASE ================= -->
 <div id="book1Modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
         <button onclick="closeModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
@@ -278,18 +279,18 @@
             <button onclick="switchTab('shopTab')" id="tabShopBtn" class="py-2 px-4 text-slate-500 hover:text-slate-800">External Shop</button>
         </div>
 
-        <!-- TAB 1: Direct Crypto + On-Chain Auto Verification -->
+        <!-- TAB 1: Direct Crypto Auto-Delivery -->
         <div id="cryptoTab" class="space-y-3">
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
-                <div class="font-bold text-slate-800 mb-1">1. Send Payment ($10 USDT/ETH/Polygon):</div>
+                <div class="font-bold text-slate-800 mb-1">1. Send $10 Payment:</div>
                 <div class="space-y-1.5 font-mono text-[11px]">
                     <div class="bg-white p-2 rounded border border-slate-200">
-                        <span class="text-[10px] text-slate-400 font-sans block">Polygon / EVM (USDT/ETH):</span>
-                        <span class="select-all break-all text-slate-800 font-bold">0xYourEVMWalletAddressHere</span>
+                        <span class="text-[10px] font-sans font-bold text-purple-600 block">Solana Network (USDC / SOL):</span>
+                        <span class="select-all break-all text-slate-800 font-bold">YourSolanaWalletAddressHere</span>
                     </div>
                     <div class="bg-white p-2 rounded border border-slate-200">
-                        <span class="text-[10px] text-slate-400 font-sans block">TRON Network (USDT TRC20):</span>
-                        <span class="select-all break-all text-slate-800 font-bold">YourTronTRC20AddressHere</span>
+                        <span class="text-[10px] font-sans text-slate-400 block">Polygon / EVM (USDT / ETH):</span>
+                        <span class="select-all break-all text-slate-800 font-bold">0xYourEVMWalletAddressHere</span>
                     </div>
                 </div>
             </div>
@@ -300,8 +301,8 @@
                     <input type="email" id="buyerEmail" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs" placeholder="you@example.com">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">3. Enter Transaction Hash / TxID:</label>
-                    <input type="text" id="txIdInput" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono" placeholder="0x... or TxHash">
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">3. Enter Transaction Hash / Signature:</label>
+                    <input type="text" id="txIdInput" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono" placeholder="Solana Signature or 0x Hash">
                 </div>
                 
                 <div id="verificationStatus" class="hidden"></div>
@@ -327,17 +328,17 @@
     </div>
 </div>
 
-<!-- ================= MODAL: PRE-ORDER (BOOKS 2, 3, 4) ================= -->
+<!-- ================= MODAL 2: PRE-ORDER (BOOKS 2, 3, 4) ================= -->
 <div id="preorderModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
         <button onclick="closeModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
         
         <h3 id="preorderTitle" class="text-xl font-bold text-slate-900 mb-1">Pre-Order Book</h3>
-        <p class="text-xs text-slate-500 mb-4">Support publication & reserve your copy with crypto.</p>
+        <p class="text-xs text-slate-500 mb-4">Reserve your copy with low-fee Solana USDC or EVM USDT.</p>
 
         <form onsubmit="handlePreorderSubmit(event)" class="space-y-4">
             <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Select or Enter Amount ($ USD)</label>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Select Pre-Order Amount ($ USD)</label>
                 <div class="grid grid-cols-3 gap-2 mb-2">
                     <button type="button" onclick="setAmount(2)" class="py-2 rounded-lg border border-slate-300 text-xs font-bold bg-slate-50 hover:bg-slate-100">$2 Standard</button>
                     <button type="button" onclick="setAmount(5)" class="py-2 rounded-lg border border-slate-300 text-xs font-bold bg-slate-50 hover:bg-slate-100">$5 Supporter</button>
@@ -347,15 +348,27 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Your Email (for release notification)</label>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Your Email (for release & delivery update)</label>
                 <input type="email" id="preorderEmail" required class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-red-500" placeholder="you@example.com">
             </div>
 
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
-                <div class="font-bold text-slate-800 mb-1">Deposit Address:</div>
-                <div class="font-mono text-[11px] bg-white p-2 rounded border border-slate-200 select-all break-all text-slate-800 font-bold">
-                    0xYourEVMWalletAddressHere
+                <div class="font-bold text-slate-800 mb-1">Send Pre-Order Payment To:</div>
+                <div class="space-y-1.5 font-mono text-[11px] mt-1">
+                    <div class="bg-white p-2 rounded border border-slate-200">
+                        <span class="text-[10px] font-sans font-bold text-purple-600 block">Solana (USDC / SOL) - Recommended:</span>
+                        <span class="select-all break-all text-slate-800 font-bold">YourSolanaWalletAddressHere</span>
+                    </div>
+                    <div class="bg-white p-2 rounded border border-slate-200">
+                        <span class="text-[10px] font-sans text-slate-400 block">Polygon / EVM (USDT / ETH):</span>
+                        <span class="select-all break-all text-slate-800 font-bold">0xYourEVMWalletAddressHere</span>
+                    </div>
                 </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Transaction Hash / Signature (Optional):</label>
+                <input type="text" id="preorderTxHash" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs font-mono" placeholder="Paste signature after transfer">
             </div>
 
             <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-md transition text-xs uppercase tracking-wider">
@@ -367,22 +380,24 @@
 
 <!-- ================= JAVASCRIPT & AUTOMATION ENGINE ================= -->
 <script>
-    // Configuration Settings
+    // Config Credentials
     const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
     const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
     const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 
+    const MY_SOLANA_WALLET = "YourSolanaWalletAddressHere";
     const MY_EVM_WALLET = "0xYourEVMWalletAddressHere".toLowerCase();
-    const POLYGON_RPC_URL = "https://polygon-rpc.com"; // Polygon RPC node
+    
+    const SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com";
+    const POLYGON_RPC_URL = "https://polygon-rpc.com";
     const BOOK_DOWNLOAD_URL = "YOUR_DIRECT_BOOK_DOWNLOAD_URL_HERE";
 
-    // Global Pre-Order Counter ID (CounterAPI)
     const COUNTER_NAMESPACE = "selfwaylive-consulting";
     const COUNTER_KEY = "preorders";
 
     // Initialize EmailJS
     (function(){
-        if(typeof emailjs !== 'undefined'){
+        if(typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY"){
             emailjs.init(EMAILJS_PUBLIC_KEY);
         }
     })();
@@ -422,10 +437,9 @@
         }
     }
 
-    // Helper: Notify Author via EmailJS
     function notifyAuthor(actionType, bookName, details) {
         if (typeof emailjs === 'undefined' || EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
-            console.log("EmailJS not configured yet. Payload:", { actionType, bookName, details });
+            console.log("Notification logged locally:", { actionType, bookName, details });
             return;
         }
 
@@ -439,7 +453,7 @@
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
     }
 
-    // On-Chain Real-Time Auto Delivery Verification
+    // Dual-Chain Verification (Solana Signature + Polygon EVM Hash)
     async function verifyAndDeliver(e) {
         e.preventDefault();
         
@@ -448,25 +462,45 @@
         const statusMsg = document.getElementById('verificationStatus');
 
         statusMsg.classList.remove('hidden');
-        statusMsg.innerText = "🔍 Checking blockchain transaction status...";
+        statusMsg.innerText = "🔍 Checking transaction on-chain...";
         statusMsg.className = "p-3 rounded-lg bg-amber-50 text-amber-700 text-xs font-semibold";
 
         try {
-            // Query Polygon RPC node for transaction receipt
-            const provider = new ethers.providers.JsonRpcProvider(POLYGON_RPC_URL);
-            const txReceipt = await provider.getTransactionReceipt(txHash);
+            let isVerified = false;
 
-            if (!txReceipt) {
-                statusMsg.innerText = "⏳ Transaction pending or not found yet. Please wait 15 seconds and try again.";
-                statusMsg.className = "p-3 rounded-lg bg-amber-50 text-amber-700 text-xs font-semibold";
-                return;
+            // Solana signature verification (Base58 signature format)
+            if (!txHash.startsWith("0x")) {
+                const solanaRes = await fetch(SOLANA_RPC_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        jsonrpc: "2.0",
+                        id: 1,
+                        method: "getSignatureStatuses",
+                        params: [[txHash], { searchTransactionHistory: true }]
+                    })
+                });
+
+                const solData = await solanaRes.json();
+                const status = solData?.result?.value?.[0];
+
+                if (status && (status.confirmationStatus === "confirmed" || status.confirmationStatus === "finalized") && !status.err) {
+                    isVerified = true;
+                }
+            } else {
+                // EVM Polygon verification via Ethers.js
+                const provider = new ethers.providers.JsonRpcProvider(POLYGON_RPC_URL);
+                const txReceipt = await provider.getTransactionReceipt(txHash);
+                
+                if (txReceipt && txReceipt.status === 1) {
+                    isVerified = true;
+                }
             }
 
-            if (txReceipt.status === 1) {
-                statusMsg.innerText = "✅ Transaction Verified! Initiating auto-download...";
+            if (isVerified) {
+                statusMsg.innerText = "✅ Transaction Verified! Unlocking digital download...";
                 statusMsg.className = "p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold";
 
-                // Email notification to author
                 notifyAuthor('Book 1 Auto-Delivered', 'Conscious Biogenesis', `Buyer Email: ${email} | TxHash: ${txHash}`);
 
                 setTimeout(() => {
@@ -475,17 +509,16 @@
                 }, 1200);
 
             } else {
-                statusMsg.innerText = "❌ Transaction failed on the blockchain.";
-                statusMsg.className = "p-3 rounded-lg bg-red-50 text-red-700 text-xs font-semibold";
+                statusMsg.innerText = "⏳ Transaction pending or not found yet. Please wait 10 seconds and try again.";
+                statusMsg.className = "p-3 rounded-lg bg-amber-50 text-amber-700 text-xs font-semibold";
             }
 
         } catch (error) {
             console.error(error);
-            // Fallback delivery mode if RPC node times out
             statusMsg.innerText = "⚡ Instant verification log submitted! Opening download link...";
             statusMsg.className = "p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold";
 
-            notifyAuthor('Book 1 Purchased (Manual Fallback)', 'Conscious Biogenesis', `Buyer Email: ${email} | TxHash: ${txHash}`);
+            notifyAuthor('Book 1 Purchased (Fallback)', 'Conscious Biogenesis', `Buyer Email: ${email} | TxHash: ${txHash}`);
 
             setTimeout(() => {
                 window.open(BOOK_DOWNLOAD_URL, '_blank');
@@ -493,42 +526,37 @@
             }, 1000);
         }
     }
-    
-    // Handle Pre-Order with Global Counter API
+
+    // Pre-Order Submit with Global Counter API & Email Notification
     async function handlePreorderSubmit(e) {
         e.preventDefault();
         const amount = document.getElementById('customAmount').value;
         const email = document.getElementById('preorderEmail').value;
+        const txHash = document.getElementById('preorderTxHash').value.trim();
 
         let totalCount = 1;
 
         try {
-            // Hit free public Counter API to increment global count
             const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${COUNTER_KEY}/up`);
             const data = await res.json();
             if (data && data.count) {
                 totalCount = data.count;
             }
         } catch (err) {
-            // Fallback to localStorage if offline
             totalCount = parseInt(localStorage.getItem('preorderCount') || '0') + 1;
             localStorage.setItem('preorderCount', totalCount.toString());
         }
 
-        // Send Email Alert
         notifyAuthor(
             'Pre-Order Received', 
             selectedBookTitle, 
-            `Amount: $${amount} USD | User Email: ${email} | Total Global Pre-Orders: ${totalCount}`
+            `Amount: $${amount} USD | User Email: ${email} | TxHash: ${txHash || 'Pending'} | Global Pre-Orders Total: ${totalCount}`
         );
 
-        alert(`Thank you! Pre-order reserved for "${selectedBookTitle}".\n\nPlease send $${amount} USD equivalent in crypto to complete your reservation.`);
+        alert(`Thank you! Pre-order reserved for "${selectedBookTitle}".\n\nPlease transfer $${amount} USD in Solana USDC or EVM USDT to the displayed wallet address.`);
         closeModals();
     }
 </script>
-
-
-
           
     <!-- Services Section -->
     <section id="services" class="max-w-6xl mx-auto px-6 py-20">
