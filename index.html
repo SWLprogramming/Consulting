@@ -596,22 +596,33 @@
         </div>
     </section>
 
-    <!-- Booking Section -->
-    <section id="booking" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Request Consultation</h2>
-            <p class="text-slate-600 text-sm md:text-base mb-10">
-                Select your calendar availability below or initiate a private email request.
-            </p>
-            
-            <div class="bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-md">
-                <a href="https://calendly.com/your-username" target="_blank" rel="noopener" class="inline-block bg-selfway-red text-white font-bold px-10 py-4 rounded-xl shadow-md hover:brightness-110 hover:scale-105 active:scale-95 transition">
-                    Open Booking Calendar
-                </a>
-                <p class="text-xs text-slate-500 mt-6">Or email directly: <a href="mailto:your-email@domain.com" class="text-red-600 underline">your-email@domain.com</a></p>
-            </div>
-        </div>
-    </section>
+    <!-- Request Consultation Section -->
+<section id="consultation" class="py-16 bg-slate-50 border-t border-slate-200">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-slate-900 mb-2">Request Consultation</h2>
+    <p class="text-slate-600 mb-8">Select your booking preference or send a direct private message.</p>
+
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 max-w-xl mx-auto space-y-4">
+      <!-- Calendar Booking Option (Optional external link) -->
+      <a href="https://calendly.com" target="_blank" rel="noopener" class="block w-full py-3.5 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow transition text-center">
+        Open Booking Calendar
+      </a>
+
+      <div class="flex items-center my-4 text-slate-400 text-xs uppercase tracking-wider">
+        <div class="flex-grow border-t border-slate-200"></div>
+        <span class="px-3">or</span>
+        <div class="flex-grow border-t border-slate-200"></div>
+      </div>
+
+      <!-- Private Email Request Trigger -->
+      <button onclick="openConsultationModal('General Strategic Inquiry')" class="w-full py-3.5 px-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl border border-slate-300 transition flex items-center justify-center gap-2">
+        <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        Send Private Message
+      </button>
+    </div>
+  </div>
+</section>
+          
 
     <!-- Footer -->
     <footer class="max-w-6xl mx-auto px-6 py-10 text-center border-t border-slate-200">
