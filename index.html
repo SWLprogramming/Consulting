@@ -658,6 +658,54 @@
     </form>
   </div>
 </div>
+
+  function openConsultationModal(offeringName) {
+  const modal = document.getElementById('consultationModal');
+  const offeringInput = document.getElementById('consultationOffering');
+  if (offeringInput) offeringInput.value = offeringName || 'Strategic Advisory Journey';
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeConsultationModal() {
+  const modal = document.getElementById('consultationModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function handleConsultationSubmit(event) {
+  event.preventDefault();
+
+  const submitBtn = document.getElementById('consultationSubmitBtn');
+  const offering = document.getElementById('consultationOffering').value;
+  const name = document.getElementById('consultationName').value;
+  const userEmail = document.getElementById('consultationEmail').value;
+  const message = document.getElementById('consultationMessage').value;
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Sending Message...";
+
+  const templateParams = {
+    action_type: "Consultation Request",
+    book_title: offering,
+    name: name,
+    email: userEmail,
+    details: `From: ${name} (${userEmail})\n\nTopic: ${offering}\n\nMessage:\n${message}`,
+    timestamp: new Date().toLocaleString()
+  };
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(function() {
+      alert("Thank you! Your message has been sent successfully. I will respond to your email shortly.");
+      document.getElementById('consultationForm').reset();
+      closeConsultationModal();
+    })
+    .catch(function(error) {
+      alert("Failed to send message: " + JSON.stringify(error));
+    })
+    .finally(function() {
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Message";
+    });
+}
           
           
 </body>
