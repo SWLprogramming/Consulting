@@ -181,23 +181,89 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <!-- BOOK 1: Conscious Biogenesis -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-red-300 hover:shadow-lg transition-all duration-300">
-                <div>
-                    <div class="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-5 flex flex-col items-center justify-center border border-slate-200 p-4 text-center">
-                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">Available Now</span>
-                        <span class="text-slate-900 font-extrabold text-base leading-snug">Conscious Biogenesis</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-1">Conscious Biogenesis</h3>
-                    <p class="text-xs text-red-600 font-semibold mb-2">Activation of Favorable Prospects</p>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
-                        Actionable mindset protocols, perceptual reframing, and frameworks for navigating transformative life trajectories.
-                    </p>
+            <!-- ================= MODAL: BOOK 1 PURCHASE (NO LOCATION LOCK) ================= -->
+<div id="book1Modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative">
+        <button onclick="closeModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
+        
+        <h3 class="text-xl font-bold text-slate-900 mb-1">Get "Conscious Biogenesis"</h3>
+        <p class="text-xs text-slate-500 mb-4">Send crypto directly or choose an online store.</p>
+
+        <!-- Tab Controls -->
+        <div class="flex border-b border-slate-200 mb-4 text-xs font-bold">
+            <button onclick="switchTab('cryptoTab')" id="tabCryptoBtn" class="py-2 px-4 border-b-2 border-red-600 text-red-600">Crypto Direct</button>
+            <button onclick="switchTab('shopTab')" id="tabShopBtn" class="py-2 px-4 text-slate-500 hover:text-slate-800">External Shop</button>
+        </div>
+
+        <!-- TAB 1: Direct Crypto Payment -->
+        <div id="cryptoTab" class="space-y-3">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                <div class="font-bold text-slate-800 mb-1">1. Send $10 USDT (BEP20 / TRC20 / Polygon) to:</div>
+                <div class="font-mono text-[11px] text-slate-900 bg-white p-2 rounded border border-slate-200 break-all select-all">
+                    0xYourWalletAddressOrTRC20Address
                 </div>
-                <button onclick="openBook1Modal()" class="w-full text-center text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-3 rounded-xl shadow-sm transition">
-                    Buy Book
-                </button>
             </div>
+
+            <form onsubmit="verifyAndDeliver(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">2. Enter your email (for receipt):</label>
+                    <input type="email" id="buyerEmail" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">3. Enter Transaction Hash / TxID:</label>
+                    <input type="text" id="txIdInput" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono" placeholder="0x... or TxHash">
+                </div>
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    Verify & Access Download
+                </button>
+            </form>
+        </div>
+
+        <!-- TAB 2: External Bookstore Redirect -->
+        <div id="shopTab" class="hidden space-y-3">
+            <a href="YOUR_INTERNET_SHOP_URL" target="_blank" onclick="notifyAuthor('Shop Redirection', 'Conscious Biogenesis', 'External Bookstore')" class="block w-full p-4 rounded-xl border border-slate-200 hover:border-slate-400 bg-slate-50 transition text-left">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-sm text-slate-900">Buy on Online Bookstore</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Redirect to retail marketplace</div>
+                    </div>
+                    <span class="text-slate-400 font-bold text-lg">&rarr;</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchTab(tabName) {
+        if (tabName === 'cryptoTab') {
+            document.getElementById('cryptoTab').classList.remove('hidden');
+            document.getElementById('shopTab').classList.add('hidden');
+            document.getElementById('tabCryptoBtn').className = 'py-2 px-4 border-b-2 border-red-600 text-red-600';
+            document.getElementById('tabShopBtn').className = 'py-2 px-4 text-slate-500 hover:text-slate-800';
+        } else {
+            document.getElementById('cryptoTab').classList.add('hidden');
+            document.getElementById('shopTab').classList.remove('hidden');
+            document.getElementById('tabShopBtn').className = 'py-2 px-4 border-b-2 border-red-600 text-red-600';
+            document.getElementById('tabCryptoBtn').className = 'py-2 px-4 text-slate-500 hover:text-slate-800';
+        }
+    }
+
+    function verifyAndDeliver(e) {
+        e.preventDefault();
+        const email = document.getElementById('buyerEmail').value;
+        const txId = document.getElementById('txIdInput').value;
+
+        // Send email alert to you immediately
+        notifyAuthor('Book 1 Crypto Purchased', 'Conscious Biogenesis', `Buyer Email: ${email} | TxID: ${txId}`);
+
+        // Immediate direct download link access
+        alert('Payment submitted! Click OK to download your digital copy.');
+        window.open('YOUR_DIRECT_BOOK_DOWNLOAD_URL_HERE', '_blank');
+        closeModals();
+    }
+</script>
+
 
             <!-- BOOK 2: Systemic Biogenesis -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-red-300 hover:shadow-lg transition-all duration-300">
